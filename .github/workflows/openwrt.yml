@@ -32,6 +32,19 @@ jobs:
       run: |
         cd /home/runner/lede
         make -j2
+    - name: Commit to docker-repo
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        cd /home/runner
+        git clone https://github.com/breakersun/docker-openwrt.git
+        cp /home/runner/lede/bin/targets/armvirt/64/openwrt-armvirt-64-default-rootfs.tar.gz /home/runner/docker-openwrt/
+        cd /home/runner/docker-openwrt/
+        git commit -m "bump changes from source" -a
+    - name: Push to docker-repo
+      uses: ad-m/github-push-action@master
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
     - uses: actions/upload-artifact@master
       with:
         name: result
