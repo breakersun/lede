@@ -44,7 +44,8 @@ jobs:
     - name: Push to docker-repo
       uses: ad-m/github-push-action@master
       with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
+        directory: '/home/runner/docker-openwrt/'
+        github_token: ${{ secrets.MY_TOKEN }}
     - uses: actions/upload-artifact@master
       with:
         name: result
