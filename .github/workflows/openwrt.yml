@@ -22,9 +22,11 @@ jobs:
     - name: Clone Config
       run: |
         wget https://raw.githubusercontent.com/breakersun/docker-openwrt/master/.config
+    - name: Clone Clash
       run: |
         cd ./package
         mkdir mypackages
+        cd ./mypackages
         git clone https://github.com/vernesong/OpenClash.git
     - name: Build
       run: |
