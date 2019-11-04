@@ -1,4 +1,4 @@
-  
+
 name: Release
 
 on:
@@ -21,11 +21,15 @@ jobs:
         ./scripts/feeds install -a
     - name: Clone Config
       run: |
-        wget https://raw.githubusercontent.com/breakersun/build-lede/master/.config
+        wget https://raw.githubusercontent.com/breakersun/docker-openwrt/master/.config
+      run: |
+        cd ./package
+        mkdir mypackages
+        git clone https://github.com/vernesong/OpenClash.git
     - name: Build
       run: |
         make -j4
-        
+
     - name: Release/Publish BIN
       uses: skx/github-action-publish-binaries@release-1.2
       env:
